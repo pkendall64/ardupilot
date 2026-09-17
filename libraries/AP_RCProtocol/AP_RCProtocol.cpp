@@ -358,7 +358,7 @@ static_assert(ARRAY_SIZE(serial_configs) > 0, "must have at least one serial con
 
 void AP_RCProtocol::check_added_uart(void)
 {
-    if (!added.uart) {
+    if (!added.uart || added.uart->is_write_locked()) {
         return;
     }
     uint32_t now = AP_HAL::millis();
